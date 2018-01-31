@@ -1,0 +1,38 @@
+{
+    "name": "alexusmai/easy-settings",
+    "description": "Laravel + Vue - easy settings for your application",
+    "keywords": [
+        "laravel 5",
+        "settings",
+        "vue"
+    ],
+    "authors": [
+        {
+            "name": "Aleksandr Manekin",
+            "email": "alexusmai@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/alexusami/easy-settings",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/support": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alexusmai\\EasySettings\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alexusmai\\EasySettings\\EasySettingsServiceProvider"
+            ],
+            "aliases": {
+                "ESettings": "Alexusmai\\EasySettings\\Facades\\EasySettingsFacade"
+            }
+        }
+    }
+}
