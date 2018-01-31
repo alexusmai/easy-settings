@@ -1,4 +1,3 @@
-# Please don't use now !!!! TEST !!!
 # Easy settings - Laravel + Vue package
 
 The application is designed for convenient and fast work with simple data of your application.
@@ -52,9 +51,83 @@ Publish js and css files - laravel-vue-easy-settings package (compiled, minimise
 php artisan vendor:publish --tag=easy-settings-assets
 ```
 
+## Settings
+
+Open configuration file - config/easy-settings.php
+``` php
+/**
+     * List of languages
+     * add the necessary ones to create additional fields(field type "Lang")
+     */
+    'languages'     => ['en', 'ru'],
+
+    /**
+     * Development mode
+     * Show - edit/add settings group
+     */
+    'dev'           => true,
+
+    /**
+     * Save data to laravel cache
+     * The cache will not work in development mode
+     * set null, 0 - if you don't need cache (default)
+     * if you want use cache - set the number of minutes for which the value should be cached
+     */
+    'cache'         => null,
+
+    /**
+     * Middleware
+     * Add your middleware name to array -> ['web', 'auth', 'admin']
+     * !!!! RESTRICT ACCESS FOR NON ADMIN USERS !!!!
+     */
+    'middleware'    => ['web', 'auth']
+```
+
+In '`languages`' array you can add the necessary languages
+
+To create and edit groups of settings, you must use the `developer mode`.
+After you have added the necessary groups of settings, disable the developer mode if you do not want users to be able to change the structure, validation rules, delete, etc.
+
+`Use caching, this will avoid unnecessary queries to the database`
+
+**Be sure to add your middleware to restrict access to the application**
+
+###Open the view file where you want to place the application block, and add:
+
+- add a csrf token to head block if you did not do it before
+```html
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+```
+- the package uses some styles of Bootstrap 4, if you already use it, then you do not need to connect any styles.
+ Otherwise add -
+
+```html
+<link href="{{ asset('vendor/easy-settings/css/esettings.css') }}" rel="stylesheet">
+```
+
+- add js (laravel-vue-easy-settings)
+```html
+<script src="{{ asset('vendor/easy-settings/js/esettings.js') }}"></script>
+```
+
+- add div for application
+```html
+<div id="easy-settings-app"></div>
+```
+
 ## Usage
 
+Now it remains to add the necessary settings groups, add fields, validation rules and can be used in your code.
 
+```php
+Esettings::get('groupName.settingsName');
+Esettings::get('groupName.settingsName', $defaultValue);
+```
 
-If the desired language is not found - will be use fallback locale
-     * config/app.php --->  falback_locale
+- If you have chosen 'radios' type, the result will be a boolean type (true or false).
+- If "Lang" type is selected, the result will depend on the settings of the language of your application, at the time of the call.
+- If the desired language is not found - will be use fallback locale (see config/app.php) or default value.
+```php
+'fallback_locale' => 'en',
+```

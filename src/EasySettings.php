@@ -55,8 +55,18 @@ class EasySettings
         // find field type
         $fieldType = $this->fieldType($item->schema, $settingsName);
 
-        // for lang type fields
-        if ($fieldType === 'lang') {
+        // for radios type
+        if ($fieldType === 'radios') {
+
+            // if this key doesn't exist
+            if ( !array_key_exists($settingsName, $data)) return $default;
+
+            // return boolean type
+            return $data[$settingsName] === 'true';
+
+        } elseif ($fieldType === 'lang') {
+            // for lang type fields
+
             // get locale
             $locale = \App::getLocale();
 
