@@ -59,6 +59,12 @@ Publish js and css files - laravel-vue-easy-settings package (compiled, minimise
 php artisan vendor:publish --tag=easy-settings-assets
 ```
 
+Run migration -> this command create "easy-settings" table
+
+```php
+php artisan migrate
+```
+
 ## Settings
 
 Open configuration file - config/easy-settings.php
