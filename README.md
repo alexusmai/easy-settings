@@ -1,5 +1,7 @@
 # Easy settings - Laravel + Vue package
 
+![Easy Settings Vue App](https://raw.github.com/alexusmai/laravel-vue-easy-settings/master/src/assets/esettings.gif?raw=true)
+
 The application is designed for convenient and fast work with simple data of your application.
 
 For example, you need to place a phone number in the footer of your site.
@@ -41,7 +43,8 @@ Publish config file (easy-settings.php)
 php artisan vendor:publish --tag=easy-settings-config
 ```
 
-You can install npm package directly and use it in your vue application - more informations about it you can find here
+You can install npm package directly and use it in your vue application - more information about it -
+[laravel-vue-easy-settings](https://github.com/alexusmai/laravel-vue-easy-settings)
 
 OR
 
@@ -121,8 +124,8 @@ After you have added the necessary groups of settings, disable the developer mod
 Now it remains to add the necessary settings groups, add fields, validation rules and can be used in your code.
 
 ```php
-Esettings::get('groupName.settingsName');
-Esettings::get('groupName.settingsName', $defaultValue);
+ESettings::get('groupName.settingsName');
+ESettings::get('groupName.settingsName', $defaultValue);
 ```
 
 - If you have chosen 'radios' type, the result will be a boolean type (true or false).
