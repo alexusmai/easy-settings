@@ -1,5 +1,10 @@
 # Easy settings - Laravel + Vue package
 
+[![Latest Stable Version](https://poser.pugx.org/alexusmai/easy-settings/v/stable)](https://packagist.org/packages/alexusmai/easy-settings)
+[![Total Downloads](https://poser.pugx.org/alexusmai/easy-settings/downloads)](https://packagist.org/packages/alexusmai/easy-settings)
+[![Latest Unstable Version](https://poser.pugx.org/alexusmai/easy-settings/v/unstable)](https://packagist.org/packages/alexusmai/easy-settings)
+[![License](https://poser.pugx.org/alexusmai/easy-settings/license)](https://packagist.org/packages/alexusmai/easy-settings)
+
 ![Easy Settings Vue App](https://raw.github.com/alexusmai/laravel-vue-easy-settings/master/src/assets/esettings.gif?raw=true)
 
 The application is designed for convenient and fast work with simple data of your application.
