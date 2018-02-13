@@ -61,7 +61,7 @@ php artisan vendor:publish --tag=easy-settings-assets
 
 Run migration -> this command create "easy-settings" table
 
-```php
+``` bash
 php artisan migrate
 ```
 
@@ -106,7 +106,8 @@ After you have added the necessary groups of settings, disable the developer mod
 
 **Be sure to add your middleware to restrict access to the application**
 
-###Open the view file where you want to place the application block, and add:
+
+### Open the view file where you want to place the application block, and add:
 
 - add a csrf token to head block if you did not do it before
 ```html
