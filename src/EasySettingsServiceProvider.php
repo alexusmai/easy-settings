@@ -2,6 +2,7 @@
 
 namespace Alexusmai\EasySettings;
 
+use Alexusmai\EasySettings\Commands\EasySettingsCreateSeed;
 use Illuminate\Support\ServiceProvider;
 use Alexusmai\EasySettings\Models\EasySettings as EasySettingsModel;
 
@@ -14,6 +15,9 @@ class EasySettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // commands
+        $this->commands(EasySettingsCreateSeed::class);
+
         // routes
          $this->loadRoutesFrom(__DIR__.'/routes.php');
 

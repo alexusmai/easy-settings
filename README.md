@@ -146,3 +146,14 @@ ESettings::get('groupName.settingsName', $defaultValue);
 ```php
 'fallback_locale' => 'en',
 ```
+
+### Seeder
+Sometimes you need to roll back the database while developing the project,
+ and the package data will be lost. In order to avoid this, you can run the command
+  
+``` bash
+php artisan esettings:seed
+```
+  
+ That will generate a seeder (EasySettingsSeeder) that will contain your data,
+  and you will need to add it to your seeders list (database/seeds/DatabaseSeeder.php)
