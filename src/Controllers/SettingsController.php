@@ -116,7 +116,7 @@ class SettingsController extends Controller
      */
     public function setSettings(Request $request)
     {
-        $group = $this->model->findOrFail($request->input('id'));
+        $group = $this->model->findOrFail($request->input('easy-settings-id'));
 
         // create rules array
         $rules = $this->createRulesArray($group);
@@ -125,11 +125,13 @@ class SettingsController extends Controller
         $this->validate($request, $rules);
 
         // save new data to DB
-        $group->data = $request->except(['id', '_token']);
+        $group->data = $request->except(['easy-settings-id', '_token']);
         $group->save();
 
         // clear cache
-        Cache::forget('esettings-'.$group->name);
+        if (config('easy-settings.cache')) {
+            Cache::forget('esettings-'.$group->name);
+        }
 
         return response()->json(['message' => trans('esettings::response.settingsUpdated')]);
     }
