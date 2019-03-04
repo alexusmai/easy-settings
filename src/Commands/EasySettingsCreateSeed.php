@@ -46,8 +46,6 @@ class EasySettingsCreateSeed extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
@@ -55,11 +53,11 @@ class EasySettingsCreateSeed extends Command
         // get all data from db
         $data = $this->model->all();
 
-        if ( !$data->isEmpty() ) {
+        if (!$data->isEmpty()) {
 
             $str = '';
 
-            foreach($data as $item) {
+            foreach ($data as $item) {
 
                 // get template
                 $str .= $this->tableSchema();
@@ -69,13 +67,13 @@ class EasySettingsCreateSeed extends Command
                     '{title}',
                     '{schema}',
                     '{data}',
-                    '{created_at}'
+                    '{created_at}',
                 ], [
                     $item->name,
                     $item->title,
                     json_encode($item->schema),
                     json_encode($item->data),
-                    $item->created_at
+                    $item->created_at,
                 ], $str);
 
             }
@@ -108,6 +106,7 @@ class EasySettingsCreateSeed extends Command
 
     /**
      * Table template
+     *
      * @return string
      */
     protected function tableSchema()

@@ -5,7 +5,7 @@ namespace Alexusmai\EasySettings\Controllers;
 use Alexusmai\EasySettings\Models\EasySettings;
 use Alexusmai\EasySettings\Requests\GroupSchemaRequest;
 use Alexusmai\EasySettings\Traits\SchemaService;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Cache;
 
@@ -20,6 +20,7 @@ class SettingsController extends Controller
 
     /**
      * SettingsController constructor.
+     *
      * @param EasySettings $settings
      */
     public function __construct(EasySettings $settings)
@@ -29,6 +30,7 @@ class SettingsController extends Controller
 
     /**
      * Initial settings for vue app
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function initiate()
@@ -37,12 +39,13 @@ class SettingsController extends Controller
 
         return response()->json([
             'config' => config('easy-settings'),
-            'locale' => $locale
-        ] );
+            'locale' => $locale,
+        ]);
     }
 
     /**
      * Settings list
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function settingsList()
@@ -52,14 +55,21 @@ class SettingsController extends Controller
 
     /**
      * Add new group
+     *
      * @param GroupSchemaRequest $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function addGroup(GroupSchemaRequest $request)
     {
         // names must be unique
-        if ( count( $request->input('name') ) !== count(array_unique( $request->input('name') ) ) ) {
-            return response()->json(['errors' => [trans('esettings::response.uniqueNames')] ], 422);
+        if (count($request->input('name'))
+            !== count(array_unique($request->input('name')))
+        ) {
+            return response()->json(
+                ['errors' => [trans('esettings::response.uniqueNames')]],
+                422
+            );
         }
 
         $schema = $this->createSchemaArray($request->except('id'));
@@ -75,19 +85,27 @@ class SettingsController extends Controller
 
     /**
      * Update selected settings group
+     *
      * @param GroupSchemaRequest $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function updateGroup(GroupSchemaRequest $request)
     {
         // names must be unique
-        if ( count( $request->input('name') ) !== count(array_unique( $request->input('name') ) ) ) {
-            return response()->json(['errors' => [trans('esettings::response.uniqueNames')] ], 422);
+        if (count($request->input('name'))
+            !== count(array_unique($request->input('name')))
+        ) {
+            return response()->json(
+                ['errors' => [trans('esettings::response.uniqueNames')]],
+                422
+            );
         }
 
         $schema = $this->createSchemaArray($request->except('id'));
 
-        $settingsGroup = $this->model->where('id', $request->input('id'))->firstOrFail();
+        $settingsGroup = $this->model->where('id', $request->input('id'))
+            ->firstOrFail();
         $settingsGroup->title = $request->input('groupTitle');
         $settingsGroup->schema = $schema;
         $settingsGroup->save();
@@ -97,7 +115,9 @@ class SettingsController extends Controller
 
     /**
      * Delete group
+     *
      * @param $id
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function deleteGroup($id)
@@ -111,7 +131,9 @@ class SettingsController extends Controller
 
     /**
      * Update settings
+     *
      * @param Request $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function setSettings(Request $request)

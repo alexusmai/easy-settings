@@ -7,20 +7,22 @@ trait SchemaService
 {
     /**
      * Create schema array
+     *
      * @param $data
+     *
      * @return array
      */
     public function createSchemaArray($data)
     {
         $schema = [];
-        $count = count($data['name'] );
+        $count = count($data['name']);
 
-        for($i = 0; $count > $i; $i++){
+        for ($i = 0; $count > $i; $i++) {
             $schema[] = [
-                'name'          => $data['name'][$i],
-                'description'   => $data['description'][$i],
-                'type'          => $data['type'][$i],
-                'rules'         => $data['rules'][$i] ? $data['rules'][$i] : null,
+                'name'        => $data['name'][$i],
+                'description' => $data['description'][$i],
+                'type'        => $data['type'][$i],
+                'rules'       => $data['rules'][$i] ? $data['rules'][$i] : null,
             ];
         }
 
@@ -30,7 +32,9 @@ trait SchemaService
 
     /**
      * Create rules array for validation settings
+     *
      * @param $group
+     *
      * @return array
      */
     public function createRulesArray($group)

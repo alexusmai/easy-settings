@@ -16,6 +16,7 @@ class EasySettings
 
     /**
      * EasySettings constructor.
+     *
      * @param EasySettingsModel $model
      */
     public function __construct(EasySettingsModel $model)
@@ -25,8 +26,10 @@ class EasySettings
 
     /**
      * Get settings
-     * @param $path
+     *
+     * @param      $path
      * @param null $default
+     *
      * @return null
      */
     public function get($path, $default = null)
@@ -45,7 +48,8 @@ class EasySettings
 
             // if array is empty
             if (!$item->data) {
-                throw new Exception('Not found any data for this group! '.$groupName);
+                throw new Exception('Not found any data for this group! '
+                    .$groupName);
             }
 
             $data = array_dot($item->data);
@@ -58,7 +62,8 @@ class EasySettings
 
                 // if this key doesn't exist
                 if (!array_key_exists($settingsName, $data)) {
-                    throw new Exception('Settings name not found! '.$groupName.'.'.$settingsName);
+                    throw new Exception('Settings name not found! '.$groupName
+                        .'.'.$settingsName);
                 }
 
                 // return boolean type
@@ -74,7 +79,9 @@ class EasySettings
                 }
 
                 // if a default variable set
-                if ($default) return $default;
+                if ($default) {
+                    return $default;
+                }
 
                 // default lang name
                 $settingsName .= '.'.config('app.fallback_locale');
@@ -82,7 +89,8 @@ class EasySettings
 
             // if this key doesn't exist
             if (!array_key_exists($settingsName, $data)) {
-                throw new Exception('Settings name not found! '.$groupName.'.'.$settingsName);
+                throw new Exception('Settings name not found! '.$groupName.'.'
+                    .$settingsName);
             }
 
             return $data[$settingsName];
@@ -98,6 +106,7 @@ class EasySettings
 
     /**
      * @param $key
+     *
      * @return array
      * @throws Exception
      */
@@ -109,21 +118,24 @@ class EasySettings
             throw new Exception('Invalid key - '.$key);
         }
 
-        return [array_shift($array), implode('.',$array)];
+        return [array_shift($array), implode('.', $array)];
     }
 
     /**
      * Get settings group
+     *
      * @param $groupName
+     *
      * @return \Illuminate\Database\Eloquent\Model|mixed|null|object|static
      */
     protected function getGroupFromDB($groupName)
     {
         // Cache
         if (config('easy-settings.cache')) {
-            $item = Cache::remember('esettings-'.$groupName, config('easy-settings.cache'), function() use ($groupName) {
-                return $this->model->where('name', $groupName)->first();
-            });
+            $item = Cache::remember('esettings-'.$groupName,
+                config('easy-settings.cache'), function () use ($groupName) {
+                    return $this->model->where('name', $groupName)->first();
+                });
         } else {
             // get settings from db
             $item = $this->model->where('name', $groupName)->first();
@@ -134,13 +146,16 @@ class EasySettings
 
     /**
      * Get field type
+     *
      * @param $schema
      * @param $settingsName
+     *
      * @return mixed
      */
     protected function fieldType($schema, $settingsName)
     {
         $index = array_search($settingsName, array_column($schema, 'name'));
+
         return $schema[$index]['type'];
     }
 }
